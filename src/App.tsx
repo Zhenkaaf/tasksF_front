@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Main />
       <Sidebar />
-      <p>test git bash second accaunt at the same computer!</p>
+      <p>test git bash second accaunt at the same computer444333</p>
     </div>
   );
 }
