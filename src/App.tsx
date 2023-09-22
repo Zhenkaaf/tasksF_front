@@ -7,8 +7,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Main />
+
       <Sidebar />
+      <Main />
       <p>test git bash second accaunt at the same computer444333</p>
     </div>
   );
