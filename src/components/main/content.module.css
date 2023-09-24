@@ -1,0 +1,13 @@
+.buttonContainerOpen {
+  width: calc(100vw - 290px);
+}
+
+.buttonContainerClosed {
+  width: calc(100vw - 50px);
+}
+
+.buttonContainer {
+  display: flex;
+  overflow-x: auto;
+  height: calc(100vh - 110px);
+}

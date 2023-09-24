@@ -11,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useTheme } from "@mui/material/styles";
-import { DrawerHeader, drawerWidth } from "../../materialUI/Mui";
+import { DrawerHeader, drawerWidth } from "../materialUI/Mui";
 
 type SidebarProps = {
   open: boolean;
@@ -49,6 +49,12 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             )}
           </IconButton>
         </DrawerHeader>
+        <Divider />
+        <div>
+          <button>Create a new board</button>
+        </div>
+        <Divider />
+        My boards:
         <Divider />
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (

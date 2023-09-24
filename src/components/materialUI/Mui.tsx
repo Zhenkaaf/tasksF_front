@@ -45,6 +45,7 @@ export const Main = styled("main", {
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginLeft: `-${drawerWidth}px`,
+  width: open ? `calc(100% - ${drawerWidth}px)` : "100%", // Динамический расчет ширины
   ...(open && {
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
