@@ -12,6 +12,9 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useTheme } from "@mui/material/styles";
 import { DrawerHeader, drawerWidth } from "../materialUI/Mui";
+import { useState } from "react";
+
+import { v1 } from "uuid";
 
 type SidebarProps = {
   open: boolean;
@@ -23,6 +26,17 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [boards, setBoards] = useState({});
+  const addBoard = () => {
+    const newBoard = {
+      boardId: v1(),
+      boardTitle: "boardTitleHo-Ho",
+    };
+    const newBoards = { ...boards, [newBoard.boardId]: newBoard };
+    setBoards(newBoards);
+  };
+  console.log(boards);
 
   return (
     <div style={{ backgroundColor: "blue", height: "50px" }}>
@@ -51,7 +65,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
         </DrawerHeader>
         <Divider />
         <div>
-          <button>Create a new board</button>
+          <button onClick={addBoard}>Create a new board</button>
         </div>
         <Divider />
         My boards:
