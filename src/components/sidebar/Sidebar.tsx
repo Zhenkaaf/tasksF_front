@@ -13,30 +13,27 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useTheme } from "@mui/material/styles";
 import { DrawerHeader, drawerWidth } from "../materialUI/Mui";
 import { useState } from "react";
-
 import { v1 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { addBoard } from "../../storeRedux/boardsSlice";
 
 type SidebarProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
 };
+type Board = {
+  boardTitle: string;
+};
 ///////////////////////////////////////////////////////////////
 const Sidebar = ({ open, setOpen }: SidebarProps) => {
+  const allBoards = useSelector((state: any) => state.boards.allBoards);
+  const dispatch = useDispatch();
   const theme = useTheme();
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
-  const [boards, setBoards] = useState({});
-  const addBoard = () => {
-    const newBoard = {
-      boardId: v1(),
-      boardTitle: "boardTitleHo-Ho",
-    };
-    const newBoards = { ...boards, [newBoard.boardId]: newBoard };
-    setBoards(newBoards);
-  };
-  console.log(boards);
+  console.log("boards", allBoards);
 
   return (
     <div style={{ backgroundColor: "blue", height: "50px" }}>
@@ -65,22 +62,24 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
         </DrawerHeader>
         <Divider />
         <div>
-          <button onClick={addBoard}>Create a new board</button>
+          <button onClick={() => dispatch(addBoard({ boardTitle: "title" }))}>
+            Create a new board
+          </button>
         </div>
         <Divider />
         My boards:
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {allBoards.map((item: Board, index: number) => (
             <ListItem
-              key={text}
+              key={index}
               disablePadding
             >
               <ListItemButton>
-                <ListItemIcon>
+                {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
+                </ListItemIcon> */}
+                <ListItemText primary={item.boardTitle} />
               </ListItemButton>
             </ListItem>
           ))}
