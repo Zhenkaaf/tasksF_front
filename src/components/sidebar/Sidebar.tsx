@@ -16,17 +16,20 @@ import { useState } from "react";
 import { v1 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { addBoard } from "../../storeRedux/boardsSlice";
+import { RootStateType } from "../../storeRedux/store";
+import { selectAllBoards } from "../../selectors/allBoardsSelector";
 
-type SidebarProps = {
+interface SidebarProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-};
+}
 type Board = {
   boardTitle: string;
 };
 ///////////////////////////////////////////////////////////////
 const Sidebar = ({ open, setOpen }: SidebarProps) => {
-  const allBoards = useSelector((state: any) => state.boards.allBoards);
+  const allBoards = useSelector(selectAllBoards);
+  //useSelector автоматически вызывает selectAllBoards и передает текущее состояние Redux-хранилища в этот селектор. При вызове useSelector React Redux обнаруживает, что вы передали функцию и вызывает ее, передавая в нее текущее состояние Redux-хранилища.
   const dispatch = useDispatch();
   const theme = useTheme();
   const handleDrawerClose = () => {

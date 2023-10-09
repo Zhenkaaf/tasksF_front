@@ -13,10 +13,7 @@ import boardsReducer from "./boardsSlice";
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; */
 
-/* const rootReducer = combineReducers({
-  boards: boardsReducer,
- 
-});
+/* 
 
 const persistConfig = {
   key: "shopElf",
@@ -36,10 +33,19 @@ const store = configureStore({
 
 export const persistor = persistStore(store); */
 
-const store = configureStore({
-  reducer: {
-    boards: boardsReducer,
-  },
+const rootReducer = combineReducers({
+  boards: boardsReducer,
 });
 
+const store = configureStore({
+  reducer: rootReducer,
+});
+
+//export type RootState = ReturnType<typeof rootReducer>;
+//or
+export type RootStateType = ReturnType<typeof store.getState>;
+export type AppDispatchType = typeof store.dispatch;
 export default store;
+/* reducer: {
+    boards: boardsReducer,
+  }, */
