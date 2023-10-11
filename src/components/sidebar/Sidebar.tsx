@@ -15,11 +15,12 @@ import { DrawerHeader, drawerWidth } from "../materialUI/Mui";
 import { useState } from "react";
 import { v1 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { addBoard } from "../../storeRedux/boardsSlice";
+
 import { RootStateType } from "../../storeRedux/store";
 import { selectAllBoards } from "../../selectors/allBoardsSelector";
 import { useAppDispatch } from "../../storeRedux/reduxHooks";
 import { CreateNewBoardPortal } from "../../portals/CreateNewBoardPortal";
+import { createNewBoardAct } from "../../storeRedux/board/boardAsyncActions";
 
 interface SidebarProps {
   open: boolean;
@@ -43,7 +44,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
     setIsOpenPortal(false);
   };
   const handleCreateNewBoard = (title: string) => {
-    dispatch(addBoard({ boardTitle: title }));
+    dispatch(createNewBoardAct({ title }));
   };
 
   console.log("boards", allBoards);
