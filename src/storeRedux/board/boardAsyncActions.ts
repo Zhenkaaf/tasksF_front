@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Board, Column } from "../../types/board";
+import { Board } from "../../types/board";
+import { setLoadingAct } from "../isLoading/isLoadingSlice";
 
 /* При использовании createAsyncThunk, Redux Toolkit автоматически создает три различных типа действия для каждого thunk:
 
@@ -13,19 +14,31 @@ Board - тип результата, который ваша санка верн
 { title: string; columns: Column[] } - тип входных параметров, которые вы ожидаете в вашей асинхронной функции. Это объект с полями title (строка) и columns (массив объектов типа Column[]), который вы будете использовать внутри вашей санки для создания новой доски. */
 export const createNewBoardAct = createAsyncThunk<Board, { title: string }>(
   "boards/createNewBoard",
-  async ({ title }) => {
-    const newBoard: Board = {
-      boardTitle: title,
-      columns: [],
-    };
+  async ({ title }, { dispatch }) => {
+    /*  Redux Toolkit передает два параметра в вашу асинхронную функцию: payload и thunkAPI.
+payload - это значение, которое вы передаете, когда вызываете вашу асинхронную функцию. thunkAPI - это объект, который содержит различные полезные свойства, включая dispatch. */
+    try {
+      dispatch(setLoadingAct(true));
+      const newBoard: Board = {
+        boardTitle: title,
+        columns: [],
+      };
 
-    const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newBoard),
-    });
-    return await response.json();
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newBoard),
+        }
+      );
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(setLoadingAct(false));
+    }
   }
 );

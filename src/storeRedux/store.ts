@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import boardsReducer from "./boardsSlice";
-
+import boardsReducer from "./board/boardsSlice";
+import loadingReducer from "./isLoading/isLoadingSlice";
 /* import {
   persistStore,
   persistReducer,
@@ -35,6 +35,7 @@ export const persistor = persistStore(store); */
 
 const rootReducer = combineReducers({
   boards: boardsReducer,
+  loading: loadingReducer,
 });
 
 const store = configureStore({

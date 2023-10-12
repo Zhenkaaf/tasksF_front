@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Board } from "../types/board";
-import { createNewBoardAct } from "./board/boardAsyncActions";
+import { Board } from "../../types/board";
+import { createNewBoardAct } from "./boardAsyncActions";
 
 type InitialStateType = {
   allBoards: Board[];
@@ -41,9 +41,11 @@ const boardsSlice = createSlice({
       .addCase(fetchcAllTodos.rejected, (state) => {
         state.status = "error";
       }) */
+      .addCase(createNewBoardAct.pending, (state, action) => {})
       .addCase(createNewBoardAct.fulfilled, (state, action) => {
         state.allBoards.push(action.payload);
-      });
+      })
+      .addCase(createNewBoardAct.rejected, (state, action) => {});
     /*  .addCase(removeTodo.fulfilled, (state, action) => {
         state.list = state.list.filter((todo) => todo.id !== action.payload);
       }) */

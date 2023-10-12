@@ -17,7 +17,7 @@ import { v1 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootStateType } from "../../storeRedux/store";
-import { selectAllBoards } from "../../selectors/allBoardsSelector";
+import { selectAllBoards } from "../../selectors/allSelector";
 import { useAppDispatch } from "../../storeRedux/reduxHooks";
 import { CreateNewBoardPortal } from "../../portals/CreateNewBoardPortal";
 import { createNewBoardAct } from "../../storeRedux/board/boardAsyncActions";

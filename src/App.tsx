@@ -6,6 +6,7 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { AppBar } from "./components/materialUI/Mui";
+import Preloader from "./components/preloader/Preloader";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -37,6 +38,7 @@ function App() {
           setOpen={setOpen}
           open={open}
         />
+        <Preloader />
         <Content open={open} />
       </Box>
     </div>
