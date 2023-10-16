@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Board } from "../../types/board";
-import { createNewBoardAct } from "./boardAsyncActions";
+import { createNewBoardAct, getAllBoardsAct } from "./boardAsyncActions";
 
 type InitialStateType = {
   allBoards: Board[];
@@ -41,21 +41,23 @@ const boardsSlice = createSlice({
       .addCase(fetchcAllTodos.rejected, (state) => {
         state.status = "error";
       }) */
-      .addCase(createNewBoardAct.pending, (state, action) => {})
+      .addCase(getAllBoardsAct.fulfilled, (state, action) => {
+        console.log(action);
+        state.allBoards = action.payload;
+        /* getAllBoardsAct - это асинхронное действие, которое вы запускаете, когда хотите получить список досок.
+        getAllBoardsAct.fulfilled - это часть reducer'a, который автоматически создается Redux Toolkit при использовании createAsyncThunk. Этот fulfilled кейс срабатывает, когда ваше асинхронное действие завершилось успешно.
+
+        Внутри getAllBoardsAct.fulfilled case, action.payload представляет собой данные, которые вернула ваша асинхронная операция. В вашем случае это список досок.
+
+        state.allBoards = action.payload; - эта строка обновляет свойство allBoards в состоянии хранилища вашего Redux store новым списком досок, который был получен из вашего асинхронного запроса. */
+      })
       .addCase(createNewBoardAct.fulfilled, (state, action) => {
         state.allBoards.push(action.payload);
-      })
-      .addCase(createNewBoardAct.rejected, (state, action) => {});
+      });
+
     /*  .addCase(removeTodo.fulfilled, (state, action) => {
         state.list = state.list.filter((todo) => todo.id !== action.payload);
       }) */
-    /*  .addCase(toggleTodo.fulfilled, (state, action) => {
-        const todo = state.list.find((el) => el.id === action.payload.id);
-        if (todo) {
-          console.log("if");
-          todo.completed = action.payload.completed;
-        }
-      }); */
   },
 });
 

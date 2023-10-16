@@ -27,7 +27,7 @@ payload - это значение, которое вы передаете, ко�
       };
 
       const response = await axios.post(
-        "https://localhost:8001/boards/newboard",
+        "http://localhost:8001/boards/newboard",
         newBoard,
         {
           headers: {
@@ -36,6 +36,25 @@ payload - это значение, которое вы передаете, ко�
             "Access-Control-Allow-Methods": "POST",
           },
         }
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(setLoadingAct(false));
+    }
+  }
+);
+
+export const getAllBoardsAct = createAsyncThunk<Board[]>(
+  "boards/getAllBoardsAct",
+  async (_, { dispatch }) => {
+    try {
+      console.log("async");
+      dispatch(setLoadingAct(true));
+
+      const response = await axios.get(
+        "http://localhost:8001/boards/email/george@gmail.com"
       );
       return response.data;
     } catch (error) {

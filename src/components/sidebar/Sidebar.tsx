@@ -20,7 +20,10 @@ import { RootStateType } from "../../storeRedux/store";
 import { selectAllBoards } from "../../selectors/allSelector";
 import { useAppDispatch } from "../../storeRedux/reduxHooks";
 import { CreateNewBoardPortal } from "../../portals/CreateNewBoardPortal";
-import { createNewBoardAct } from "../../storeRedux/board/boardAsyncActions";
+import {
+  createNewBoardAct,
+  getAllBoardsAct,
+} from "../../storeRedux/board/boardAsyncActions";
 import { Board } from "../../types/board";
 import axios from "axios";
 
@@ -51,19 +54,8 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
 
   useEffect(() => {
     console.log("useEffect");
-    const getBoards = async () => {
-      try {
-        ///${user.userEmail}
-        const response = await axios.get(
-          "http://localhost:8001/boards/email/george@gmail.com"
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getBoards();
-  }, [allBoards]);
+    dispatch(getAllBoardsAct());
+  }, []);
 
   return (
     <div>
