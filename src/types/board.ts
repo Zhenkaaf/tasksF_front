@@ -6,4 +6,5 @@ export type Column = {
 export type Board = {
   boardTitle: string;
   columns: Column[];
+  boardOwnerEmail: string;
 };

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Board } from "../../types/board";
 import { setLoadingAct } from "../isLoading/isLoadingSlice";
+import axios from "axios";
 
 /* При использовании createAsyncThunk, Redux Toolkit автоматически создает три различных типа действия для каждого thunk:
 
@@ -22,19 +23,21 @@ payload - это значение, которое вы передаете, ко�
       const newBoard: Board = {
         boardTitle: title,
         columns: [],
+        boardOwnerEmail: "george@gmail.com",
       };
 
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos",
+      const response = await axios.post(
+        "https://localhost:8001/boards/newboard",
+        newBoard,
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST",
           },
-          body: JSON.stringify(newBoard),
         }
       );
-      return await response.json();
+      return response.data;
     } catch (error) {
       console.error(error);
     } finally {

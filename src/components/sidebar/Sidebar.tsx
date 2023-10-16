@@ -12,7 +12,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useTheme } from "@mui/material/styles";
 import { DrawerHeader, drawerWidth } from "../materialUI/Mui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v1 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,14 +21,14 @@ import { selectAllBoards } from "../../selectors/allSelector";
 import { useAppDispatch } from "../../storeRedux/reduxHooks";
 import { CreateNewBoardPortal } from "../../portals/CreateNewBoardPortal";
 import { createNewBoardAct } from "../../storeRedux/board/boardAsyncActions";
+import { Board } from "../../types/board";
+import axios from "axios";
 
 interface SidebarProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
-type Board = {
-  boardTitle: string;
-};
+
 ///////////////////////////////////////////////////////////////
 const Sidebar = ({ open, setOpen }: SidebarProps) => {
   const [isOpenPortal, setIsOpenPortal] = useState(false);
@@ -48,6 +48,22 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
   };
 
   console.log("boards", allBoards);
+
+  useEffect(() => {
+    console.log("useEffect");
+    const getBoards = async () => {
+      try {
+        ///${user.userEmail}
+        const response = await axios.get(
+          "http://localhost:8001/boards/email/george@gmail.com"
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getBoards();
+  }, [allBoards]);
 
   return (
     <div>
@@ -104,7 +120,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                   {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon> */}
-                  <ListItemText primary={item.boardTitle} />
+                  <ListItemText primary={item?.boardTitle} />
                 </ListItemButton>
               </ListItem>
             ))}
