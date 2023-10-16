@@ -4,6 +4,7 @@ export type Column = {
 };
 
 export type Board = {
+  _id: string;
   boardTitle: string;
   columns: Column[];
   boardOwnerEmail: string;

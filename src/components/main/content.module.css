@@ -5,9 +5,14 @@
 .buttonContainerClosed {
   width: calc(100vw - 50px);
 }
-
-.buttonContainer {
+.content__emptyBlock {
   display: flex;
-  overflow-x: auto;
-  height: calc(100vh - 110px);
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.content__emptyText {
+  width: 300px;
 }

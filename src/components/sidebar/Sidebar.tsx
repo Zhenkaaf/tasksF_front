@@ -17,7 +17,7 @@ import { v1 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootStateType } from "../../storeRedux/store";
-import { selectAllBoards } from "../../selectors/allSelector";
+import { selectAllBoards } from "../../selectors/allSelectors";
 import { useAppDispatch } from "../../storeRedux/reduxHooks";
 import { CreateNewBoardPortal } from "../../portals/CreateNewBoardPortal";
 import {
@@ -34,6 +34,7 @@ interface SidebarProps {
 
 ///////////////////////////////////////////////////////////////
 const Sidebar = ({ open, setOpen }: SidebarProps) => {
+  console.log("sidebarRerender");
   const [isOpenPortal, setIsOpenPortal] = useState(false);
   const allBoards = useSelector(selectAllBoards);
   //useSelector автоматически вызывает selectAllBoards и передает текущее состояние Redux-хранилища в этот селектор. При вызове useSelector React Redux обнаруживает, что вы передали функцию и вызывает ее, передавая в нее текущее состояние Redux-хранилища.
@@ -56,6 +57,10 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
     console.log("useEffect");
     dispatch(getAllBoardsAct());
   }, []);
+
+  const handleChooseBord = (item: string) => {
+    console.log(item);
+  };
 
   return (
     <div>
@@ -103,16 +108,17 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
           My boards:
           <Divider />
           <List>
-            {allBoards.map((item: Board, index: number) => (
+            {allBoards?.map((item: Board, index: number) => (
               <ListItem
                 key={index}
                 disablePadding
+                onClick={() => handleChooseBord(item._id)}
               >
                 <ListItemButton>
                   {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon> */}
-                  <ListItemText primary={item?.boardTitle} />
+                  <ListItemText primary={item.boardTitle} />
                 </ListItemButton>
               </ListItem>
             ))}

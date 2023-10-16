@@ -4,7 +4,7 @@ import { createNewBoardAct, getAllBoardsAct } from "./boardAsyncActions";
 
 type InitialStateType = {
   allBoards: Board[];
-  currentBoard: Board | null;
+  currentBoard: Board | null | true;
 };
 
 const initialState: InitialStateType = {

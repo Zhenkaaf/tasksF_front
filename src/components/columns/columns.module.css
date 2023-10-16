@@ -1,0 +1,5 @@
+.columnsContainer {
+  display: flex;
+  overflow-x: auto;
+  height: calc(100vh - 110px);
+}

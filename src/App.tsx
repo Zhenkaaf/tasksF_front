@@ -39,7 +39,7 @@ function App() {
           open={open}
         />
         <Preloader />
-        {/*  <Content open={open} /> */}
+        <Content open={open} />
       </Box>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Vortex } from "react-loader-spinner";
 import s from "./preloader.module.css";
 import { useSelector } from "react-redux";
-import { isLoadingState } from "../../selectors/allSelector";
+import { isLoadingState } from "../../selectors/allSelectors";
 //////////////////////////////////////////////////////////////////////
 const Preloader = () => {
   const isLoading = useSelector(isLoadingState);

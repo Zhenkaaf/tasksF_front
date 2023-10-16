@@ -1,209 +1,43 @@
 import s from "./content.module.css";
 import { DrawerHeader, Main } from "../materialUI/Mui";
+import Columns from "../columns/Columns";
+import { selectCurrentBoard } from "../../selectors/allSelectors";
+import { useSelector } from "react-redux";
 type MainProps = {
   open: boolean;
 };
 /////////////////////////////////////////////////////
 const Content = ({ open }: MainProps) => {
-  console.log("rerender");
+  const currentBoard = useSelector(selectCurrentBoard);
+  console.log("contentRerender");
   return (
-    <div>
-      <Main
-        className={s.custom}
-        open={open}
-      >
-        <DrawerHeader />
-
-        <div
-          className={`${s.buttonContainer} ${
-            open ? s.buttonContainerOpen : s.buttonContainerClosed
-          }`}
-        >
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
+    <div style={{ width: "100%" }}>
+      {currentBoard ? (
+        <div>
+          <Main
+            className={s.custom}
+            open={open}
           >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sdf szDfgdfdf sddddd ssssssssss ssssssssssfgs dsdfs df
+            <DrawerHeader />
+            <div
+              className={open ? s.buttonContainerOpen : s.buttonContainerClosed}
+            >
+              <Columns />
+            </div>
+          </Main>
+        </div>
+      ) : (
+        <div className={open ? s.buttonContainerOpen : s.buttonContainerClosed}>
+          <div className={s.content__emptyBlock}>
+            <p className={s.content__emptyText}>
+              "Before starting your project, it is essential to create a board
+              to visualize and track all the necessary tasks and milestones.
+              This board serves as a powerful tool to organize the workflow and
+              ensure effective collaboration among team members."
             </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sddddddddddddd ddddddddddddddtt dtdgdf df sdfs df
-            </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sdf szDfgdfdf sddddd ssssssssss ssssssssssfgs dsdfs df
-            </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sdf szDfgdfdf sddddd ssssssssss ssssssssssfgs dsdfs df
-            </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sddddddddddddd ddddddddddddddtt dtdgdf df sdfs df
-            </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sddddddddddddd ddddddddddddddtt dtdgdf df sdfs df
-            </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sddddddddddddd ddddddddddddddtt dtdgdf df sdfs df
-            </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sdf szDfgdfdf sddddd ssssssssss ssssssssssfgs dsdfs df
-            </p>
-          </div>
-          <div
-            style={{
-              margin: "10px",
-              overflowY: "auto",
-              minWidth: "200px",
-              maxWidth: "200px",
-            }}
-          >
-            <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
-
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>
-              SDFzds sfgs sddddddddddddd ddddddddddddddtt dtdgdf df sdfs df
-            </p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
-            <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
           </div>
         </div>
-      </Main>
+      )}
     </div>
   );
 };
