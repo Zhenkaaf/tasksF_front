@@ -4,7 +4,7 @@ import { createNewBoardAct, getAllBoardsAct } from "./boardAsyncActions";
 
 type InitialStateType = {
   allBoards: Board[];
-  currentBoard: Board | null | true;
+  currentBoard: Board | null;
 };
 
 const initialState: InitialStateType = {
@@ -16,18 +16,13 @@ const boardsSlice = createSlice({
   name: "boards",
   initialState,
   reducers: {
-    /*  createNewBoardAct: (
+    setCurrentBoard: (
       state: InitialStateType,
       action: PayloadAction<Board>
     ) => {
-      console.log(state);
-      console.log(action);
-      const newBoard = {
-        boardTitle: action.payload.boardTitle,
-        columns: action.payload.columns,
-      };
-      state.allBoards.push(newBoard);
-    }, */
+      console.log(action.payload);
+      state.currentBoard = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -61,8 +56,6 @@ const boardsSlice = createSlice({
   },
 });
 
-export const {
-  /*  createNewBoardAct */
-} = boardsSlice.actions;
+export const { setCurrentBoard } = boardsSlice.actions;
 
 export default boardsSlice.reducer;

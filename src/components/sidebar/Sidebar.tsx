@@ -26,6 +26,7 @@ import {
 } from "../../storeRedux/board/boardAsyncActions";
 import { Board } from "../../types/board";
 import axios from "axios";
+import { setCurrentBoard } from "../../storeRedux/board/boardsSlice";
 
 interface SidebarProps {
   open: boolean;
@@ -58,8 +59,8 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
     dispatch(getAllBoardsAct());
   }, []);
 
-  const handleChooseBord = (item: string) => {
-    console.log(item);
+  const handleChooseBord = (currentBoard: Board) => {
+    dispatch(setCurrentBoard(currentBoard));
   };
 
   return (
@@ -112,7 +113,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
               <ListItem
                 key={index}
                 disablePadding
-                onClick={() => handleChooseBord(item._id)}
+                onClick={() => handleChooseBord(item)}
               >
                 <ListItemButton>
                   {/* <ListItemIcon>
