@@ -16,16 +16,15 @@ import { useEffect, useState } from "react";
 import { v1 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 
-import { RootStateType } from "../../storeRedux/store";
 import { selectAllBoards } from "../../selectors/allSelectors";
 import { useAppDispatch } from "../../storeRedux/reduxHooks";
-import { CreateNewBoardPortal } from "../../portals/CreateNewBoardPortal";
+import { CreateNewBoardPortal } from "../../portals/newBoard/CreateNewBoardPortal";
 import {
   createNewBoardAct,
   getAllBoardsAct,
 } from "../../storeRedux/board/boardAsyncActions";
 import { Board } from "../../types/board";
-import axios from "axios";
+
 import { setCurrentBoard } from "../../storeRedux/board/boardsSlice";
 
 interface SidebarProps {
@@ -119,7 +118,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                   {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon> */}
-                  <ListItemText primary={item.boardTitle} />
+                  <ListItemText primary={item?.boardTitle} />
                 </ListItemButton>
               </ListItem>
             ))}

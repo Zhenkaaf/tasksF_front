@@ -1,8 +1,9 @@
 import s from "./content.module.css";
 import { DrawerHeader, Main } from "../materialUI/Mui";
-import Columns from "../columns/Columns";
+
 import { selectCurrentBoard } from "../../selectors/allSelectors";
 import { useSelector } from "react-redux";
+import CurrentBoard from "../currentBoard/CurrentBoard";
 type MainProps = {
   open: boolean;
 };
@@ -22,7 +23,7 @@ const Content = ({ open }: MainProps) => {
             <div
               className={open ? s.buttonContainerOpen : s.buttonContainerClosed}
             >
-              <Columns />
+              <CurrentBoard currentBoardId={currentBoard._id} />
             </div>
           </Main>
         </div>

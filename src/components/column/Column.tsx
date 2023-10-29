@@ -1,4 +1,8 @@
-const Column = () => {
+interface ColumnProps {
+  columnTitle: string;
+}
+////////////////////////////////////////////////////////
+const Column = ({ columnTitle }: ColumnProps) => {
   return (
     <div
       style={{
@@ -8,7 +12,7 @@ const Column = () => {
         maxWidth: "200px",
       }}
     >
-      <h1 style={{ backgroundColor: "purple" }}>SDfzsdfzs</h1>
+      <h1 style={{ backgroundColor: "purple" }}>{columnTitle}</h1>
       <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
       <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>
       <p style={{ backgroundColor: "yellow" }}>SDFzds sfgs sdf sdfs df</p>

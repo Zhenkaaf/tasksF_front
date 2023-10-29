@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Board } from "../../types/board";
-import { createNewBoardAct, getAllBoardsAct } from "./boardAsyncActions";
+import { ApiError, Board } from "../../types/board";
+import {
+  createNewBoardAct,
+  createNewColumnAct,
+  getAllBoardsAct,
+} from "./boardAsyncActions";
 
 type InitialStateType = {
   allBoards: Board[];
@@ -26,18 +30,8 @@ const boardsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      /*  .addCase(fetchcAllTodos.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchcAllTodos.fulfilled, (state, action) => {
-        state.status = "finished";
-        state.list = action.payload;
-      })
-      .addCase(fetchcAllTodos.rejected, (state) => {
-        state.status = "error";
-      }) */
       .addCase(getAllBoardsAct.fulfilled, (state, action) => {
-        console.log(action);
+        console.log("getAllBoardsAct.fulfilled");
         state.allBoards = action.payload;
         /* getAllBoardsAct - это асинхронное действие, которое вы запускаете, когда хотите получить список досок.
         getAllBoardsAct.fulfilled - это часть reducer'a, который автоматически создается Redux Toolkit при использовании createAsyncThunk. Этот fulfilled кейс срабатывает, когда ваше асинхронное действие завершилось успешно.
@@ -47,7 +41,27 @@ const boardsSlice = createSlice({
         state.allBoards = action.payload; - эта строка обновляет свойство allBoards в состоянии хранилища вашего Redux store новым списком досок, который был получен из вашего асинхронного запроса. */
       })
       .addCase(createNewBoardAct.fulfilled, (state, action) => {
+        console.log("createNewBoardAct.fulfilled");
         state.allBoards.push(action.payload);
+      })
+      .addCase(createNewBoardAct.rejected, (state, action) => {
+        console.log("createNewBoardAct.rejected");
+        const payload = action.payload as ApiError;
+
+        console.log(payload.code);
+      })
+      .addCase(createNewColumnAct.fulfilled, (state, action) => {
+        console.log("createNewColumnAct.fulfilled");
+
+        const newColumn = action.payload;
+        console.log("newColumn", newColumn);
+        //проверку на айди доски добавить
+        state.currentBoard?.columns.push(newColumn);
+        /*  console.log("newColumn", newColumn);
+        const currentBoard = state.allBoards.find(
+          (board) => board._id === currentBoardId
+        );
+        currentBoard?.columns.push(newColumn); */
       });
 
     /*  .addCase(removeTodo.fulfilled, (state, action) => {

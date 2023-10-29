@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Board } from "../../types/board";
+import { ApiError, Board, Column } from "../../types/board";
 import { setLoadingAct } from "../isLoading/isLoadingSlice";
 import axios from "axios";
 
@@ -15,8 +15,8 @@ Board - тип результата, который ваша санка верн
 { title: string; columns: Column[] } - тип входных параметров, которые вы ожидаете в вашей асинхронной функции. Это объект с полями title (строка) и columns (массив объектов типа Column[]), который вы будете использовать внутри вашей санки для создания новой доски. */
 
 export const createNewBoardAct = createAsyncThunk<Board, { title: string }>(
-  "boards/createNewBoard",
-  async ({ title }, { dispatch }) => {
+  "boards/createNewBoardAct",
+  async ({ title }, { dispatch, rejectWithValue }) => {
     /*  Redux Toolkit передает два параметра в вашу асинхронную функцию: payload и thunkAPI.
 payload - это значение, которое вы передаете, когда вызываете вашу асинхронную функцию. thunkAPI - это объект, который содержит различные полезные свойства, включая dispatch. */
     try {
@@ -38,9 +38,20 @@ payload - это значение, которое вы передаете, ко�
           },
         }
       );
+      console.log("ok");
       return response.data;
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const serializedError = {
+          message: error.message,
+          code: error.code,
+        };
+        return rejectWithValue(serializedError);
+      }
+      return rejectWithValue({
+        message: "Unknown error occurred",
+        code: "UNKNOWN_ERROR",
+      });
     } finally {
       dispatch(setLoadingAct(false));
     }
@@ -56,6 +67,39 @@ export const getAllBoardsAct = createAsyncThunk<Board[]>(
       const response = await axios.get(
         "http://localhost:8001/boards/email/george@gmail.com"
       );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(setLoadingAct(false));
+    }
+  }
+);
+
+export const createNewColumnAct = createAsyncThunk<
+  Column,
+  { currentBoardId: string; title: string }
+>(
+  "boards/createNewColumnAct",
+  async ({ currentBoardId, title }, { dispatch }) => {
+    try {
+      dispatch(setLoadingAct(true));
+      const newColumn: Omit<Column, "_id"> = {
+        columnTitle: title,
+      };
+
+      const response = await axios.post(
+        `http://localhost:8001/boards/${currentBoardId}/newcolumn`,
+        newColumn,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST",
+          },
+        }
+      );
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error(error);

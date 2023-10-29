@@ -1,6 +1,6 @@
 export type Column = {
   columnTitle: string;
-  columnId: string;
+  _id: string;
 };
 
 export type Board = {
@@ -8,4 +8,8 @@ export type Board = {
   boardTitle: string;
   columns: Column[];
   boardOwnerEmail: string;
+};
+export type ApiError = {
+  message: string;
+  code: string | undefined;
 };
