@@ -45,14 +45,11 @@ const boardsSlice = createSlice({
         state.allBoards.push(action.payload);
       })
       .addCase(createNewBoardAct.rejected, (state, action) => {
-        console.log("createNewBoardAct.rejected");
         const payload = action.payload as ApiError;
-
-        console.log(payload.code);
+        console.error(payload.code);
       })
       .addCase(createNewColumnAct.fulfilled, (state, action) => {
         console.log("createNewColumnAct.fulfilled");
-
         const newColumn = action.payload;
         console.log("newColumn", newColumn);
         //проверку на айди доски добавить
